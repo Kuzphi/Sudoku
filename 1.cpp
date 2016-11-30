@@ -132,13 +132,8 @@ struct DanceLink{
 	}
 	void Restore(Node* col){
 		col->l -> r = col -> r ->l = col;
-<<<<<<< HEAD
 		for (Node *i = col -> u; i != col; i = i -> u){
 			for (Node * j = i -> l; j != i; j = j -> l){
-=======
-		for (Node *i = col -> d; i != col; i = i -> d){
-			for (Node * j = i -> r; j != i; j = j -> r){
->>>>>>> c6ad5b962a3ed88e50fdadb590ec536ce8d1d632
 				j -> u -> d = j -> d -> u = j;
 				c[j->y]->cnt ++;
 			}
@@ -154,20 +149,12 @@ struct DanceLink{
 		// cout <<"!"<< min -> cnt << endl;
 		if(min->cnt <= 0) return 0;
 		Remove(min);
-<<<<<<< HEAD
 		for (Node* i = min -> u; i!= min; i = i->u){
-=======
-		for (Node* i = min -> d; i!= min; i = i->d){
->>>>>>> c6ad5b962a3ed88e50fdadb590ec536ce8d1d632
 			ans[++ans[0]] = i -> x;			
 			for(Node* j = i->r; j != i; j = j -> r)
 				Remove(c[j->y]);
 			if (Solve()) return 1;
-<<<<<<< HEAD
 			for(Node* j = i->l; j != i; j = j -> l)
-=======
-			for(Node* j = i->r; j != i; j = j -> r)
->>>>>>> c6ad5b962a3ed88e50fdadb590ec536ce8d1d632
 				Restore(c[j->y]);
 			ans[0] --;
 		}
@@ -210,20 +197,10 @@ struct Sudoku{
 	}
 	bool Solve(int mp[][9]){
 		if (!DLX.Solve()) return 0;
-<<<<<<< HEAD
 		rep(i,1,DLX.ans[0]){
 			int num = DLX.ans[i] % 9;
 			DLX.ans[i] /= 9;
 			int x = DLX.ans[i] / 9, y = DLX.ans[i] % 9;
-=======
-		// cout << DLX.ans[0] << endl;
-		rep(i,1,DLX.ans[0]){
-			// cout << DLX.ans[i] << endl;
-			int num = DLX.ans[i] % 9;
-			DLX.ans[i] /= 9;
-			int x = DLX.ans[i] / 9, y = DLX.ans[i] % 9;
-			// cout << x <<" "<< y <<" "<< num <<endl;
->>>>>>> c6ad5b962a3ed88e50fdadb590ec536ce8d1d632
 			mp[x][y] = num + 1;
 		}
 		return 1;
@@ -231,7 +208,6 @@ struct Sudoku{
 	
 }sudoku;
 int mp[9][9];
-<<<<<<< HEAD
 string st;
 int main(){
 	// cin >> T;
@@ -244,23 +220,6 @@ int main(){
 		}
 		// cout << st << endl;
 		//cin >> st;
-=======
-int main(){
-	cin >> T;
-	while(T--){
-		// rep(i,1,9)
-		// 	rep(j,1,9)
-		// 		cin >> mp[i][j];
-		string st;
-		rep(i,0,8){			
-			cin >> st;
-			// cout <<st << endl;
-			rep(j,0,8)
-				mp[i][j] = st[j] == '?'?0:st[j] - '0';
-		}
-		// cout << st << endl;
-		cin >> st;
->>>>>>> c6ad5b962a3ed88e50fdadb590ec536ce8d1d632
 		// cout <<"!"<< st << endl;
 		sudoku.Init();
 		sudoku.Build(mp);
@@ -270,17 +229,7 @@ int main(){
 		else {
 			rep(i,0,8) {
 				rep(j,0,8) cout << mp[i][j];
-<<<<<<< HEAD
 			}
 		}
 		cout << endl;
-=======
-				cout << endl;
-			}
-		}
-		if(T) puts("---");
->>>>>>> c6ad5b962a3ed88e50fdadb590ec536ce8d1d632
 	}
-	
-	
-}
