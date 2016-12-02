@@ -69,53 +69,27 @@ struct DanceLink{
 			pre -> r = c[i];
 			c[i] -> l = pre;
 			pre = c[i];
+			c[i]->u = c[i]->d = c[i];
 		}
 		pre  -> r = Head;
 		Head -> l = pre;
-		vector<int> vx[1010], vy[1010];
-		for (int i= 0; i < v.size();i++){
-			int x = v[i].x , y = v[i].y;
-			// cout << x <<" "<< y << endl;
-			vx[x].PB(y);
-			vy[y].PB(x);
-			toNode[v[i]] = NewNode(x,y);
-		}
-
-		for (int x = 0; x < n; x++){//0-index !!!
-			// cout <<x<<" "<< vx[x].size() <<endl;
-			if (!vx[x].size()) continue;
-			sort(vx[x].begin(),vx[x].end());
-			Node* pre = NULL;
-
-			for (int i = 0; i < vx[x].size(); i++){
-
-				int y = vx[x][i];
-				// cout << x <<" "<<y << endl;
-				Node *now = toNode[Data(x,y)];
-				if (pre) pre -> r = now;
-				now -> l = pre;
-
-				pre = now;
-
+		sort(v.begin(), v.end());
+		for (int i = 0;i < v.size(); i++){
+			int x = v[i].x, y = v[i].y;
+			Node* vi = NewNode(x,y);
+			c[y]->u->d = vi;
+			vi->u = c[y]->u;
+			vi->d = c[y];
+			c[y]->u = vi;
+			if (i == 0 || x != v[i-1].x)
+				vi->l = vi -> r = vi;			
+			else{
+				pre -> r -> l = vi;
+				vi -> l = pre;
+				vi -> r = pre -> r;
+				pre -> r = vi;
 			}
-			pre -> r = toNode[Data(x,vx[x][0])];
-			toNode[Data(x,vx[x][0])] -> l = pre;
-		}
-
-		for (int y = 0; y < m; y++){//0-index !!!
-			if (!vy[y].size()) continue;
-			sort(vy[y].begin(),vy[y].end());
-			Node* pre = c[y];
-			pre -> cnt = vy[y].size();
-			for (int i = 0; i < vy[y].size(); i++){
-				int x = vy[y][i];
-				Node *now = toNode[Data(x,y)];
-				pre -> d = now;
-				now -> u = pre;
-				pre = now;
-			}
-			pre -> d = c[y];
-			c[y] -> u = pre;
+			pre = vi;
 		}
 	}
 	void Remove(Node* col){
@@ -233,3 +207,4 @@ int main(){
 		}
 		cout << endl;
 	}
+}
