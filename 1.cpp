@@ -21,7 +21,7 @@
 #define drep(i, a, b) for(int i = a; i >= b; i--)
 using namespace std;
 const double pi = acos(-1.), eps = 1e-6;
-const int                   Maxn=50010,Maxm=2500000,Mo=1e9 + 7,oo=INT_MAX >> 1;
+const int                   Maxn=5010,Maxm=2500000,Mo=1e9 + 7,oo=INT_MAX >> 1;
 const int sp[4][2] = {{-1,0},{0,1},{1,0},{0,-1}};
 int T;
 using namespace std;
@@ -49,7 +49,7 @@ struct DanceLink{
 	int n, m, cnt, vcnt, ans[Maxn];
 	void Init(int _n, int _m){
 		n = _n, m = _m;
-		vcnt =ans[0] = cnt = 0;
+		vcnt = ans[0] = cnt = 0;
 	}
 	void add(int x,int y){//0-index
 		v[vcnt++] = Data(x,y);
